@@ -1,4 +1,4 @@
-import { Delete, Edit } from "@mui/icons-material";
+import { ArrowForward, Delete, Edit } from "@mui/icons-material";
 import {
   IconButton,
   Paper,
@@ -10,6 +10,7 @@ import {
   TableRow,
 } from "@mui/material";
 import React from "react";
+import { Link } from "react-router-dom";
 
 const EmployeesTable = ({ employees, onDeleteEmployee }) => {
   return (
@@ -34,6 +35,16 @@ const EmployeesTable = ({ employees, onDeleteEmployee }) => {
               <TableCell>{emp.username}</TableCell>
               <TableCell>{emp.email}</TableCell>
               <TableCell>
+                <Link to={`/employees/${emp.id}`}>
+                  <IconButton color="primary">
+                    <ArrowForward />
+                  </IconButton>
+                </Link>
+                <IconButton
+                  onClick={() => onDeleteEmployee(emp.id)}
+                  color="primary">
+                  <Edit />
+                </IconButton>
                 <IconButton
                   onClick={() => onDeleteEmployee(emp.id)}
                   color="error">
