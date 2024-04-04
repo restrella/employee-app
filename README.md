@@ -2,7 +2,7 @@
 /employees
 /employees/<employeeid>
 /employees/new
-/employee/<employeeid>/id
+/employees/<employeeid>/edit
 /other
 /not-found
 

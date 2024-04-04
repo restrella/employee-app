@@ -10,29 +10,37 @@ import {
 import Joi from "joi";
 import React, { useState } from "react";
 
-const EmployeeForm = ({ onSubmit }) => {
-  const [form, setForm] = useState({
-    name: "",
-    username: "",
-    // email: "",
-    // phone: "",
-    // address: "",
-    // website: "",
-  });
+const EmployeeForm = ({ onSubmit, initialValue }) => {
+  const [form, setForm] = useState(
+    initialValue || {
+      name: "",
+      username: "",
+      email: "",
+      phone: "",
+      address: "",
+      website: "",
+    }
+  );
 
   const [errors, setErrors] = useState({});
+
   const handleSubmit = (event) => {
-    console.log("submit");
     event.preventDefault();
-    console.log("prevent");
     console.log(form);
-    // onSubmit(form);
+    onSubmit(form);
   };
 
   const schema = Joi.object({
     name: Joi.string().min(2).max(100).required(),
     username: Joi.string().min(3).max(20).required(),
-    // website: Joi.string().uri().allow("").optional(),
+    email: Joi.string().min(3).max(500).allow("").optional(),
+    // email: Joi.string()
+    //   //   .email({ minDomainSegments: 2, tlds: { allow: ["com" | "net"] } })
+    //   .email()
+    //   .required(),
+    phone: Joi.string().min(6).max(15).allow("").optional(),
+    address: Joi.string().min(3).max(500).allow("").optional(),
+    website: Joi.string().uri().allow("").optional(),
   });
 
   const isFormInvalid = () => {
@@ -98,6 +106,54 @@ const EmployeeForm = ({ onSubmit }) => {
                   onChange={handleChange}
                   value={form.username}
                   label="Username"
+                  variant="standard"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="email"
+                  error={!!errors.email}
+                  helperText={errors.email}
+                  onChange={handleChange}
+                  value={form.email}
+                  label="Email"
+                  variant="standard"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="phone"
+                  error={!!errors.phone}
+                  helperText={errors.phone}
+                  onChange={handleChange}
+                  value={form.phone}
+                  label="Phone"
+                  variant="standard"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="address"
+                  error={!!errors.address}
+                  helperText={errors.address}
+                  onChange={handleChange}
+                  value={form.address}
+                  label="Adress"
+                  variant="standard"
+                  fullWidth
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  name="website"
+                  error={!!errors.website}
+                  helperText={errors.website}
+                  onChange={handleChange}
+                  value={form.website}
+                  label="Website"
                   variant="standard"
                   fullWidth
                 />

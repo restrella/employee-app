@@ -11,8 +11,9 @@ import {
 } from "@mui/material";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
+import * as employeeService from "../services/employee";
 
-const EmployeeDetailsPage = ({ employees }) => {
+const EmployeeDetailsPage = () => {
   const params = useParams();
   const [anchorEl, setAnchorEl] = useState(null);
 
@@ -25,13 +26,18 @@ const EmployeeDetailsPage = ({ employees }) => {
   };
 
   useEffect(() => {
+    console.log("useEffectDetails");
     setLoading(true);
-    console.log(employees);
-    const empl = employees.find((x) => x.id === +params.id);
-    console.log(empl);
-    setEmp(employees.find((x) => x.id === +params.id));
-    setLoading(false);
-  }, [params.id]);
+    // console.log(employees);
+    // const empl = employees.find((x) => x.id === +params.id);
+    // console.log(empl);
+    // setEmp(employees.find((x) => x.id === +params.id));
+
+    employeeService.fetchEmployeeById(+params.id).then(({ data }) => {
+      setEmp(data);
+      setLoading(false);
+    });
+  }, []);
 
   if (loading) {
     return <h1>Loading...</h1>;

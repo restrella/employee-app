@@ -40,11 +40,11 @@ const EmployeesTable = ({ employees, onDeleteEmployee }) => {
                     <ArrowForward />
                   </IconButton>
                 </Link>
-                <IconButton
-                  onClick={() => onDeleteEmployee(emp.id)}
-                  color="primary">
-                  <Edit />
-                </IconButton>
+                <Link to={`/employees/${emp.id}/edit`}>
+                  <IconButton color="primary">
+                    <Edit />
+                  </IconButton>
+                </Link>
                 <IconButton
                   onClick={() => onDeleteEmployee(emp.id)}
                   color="error">
