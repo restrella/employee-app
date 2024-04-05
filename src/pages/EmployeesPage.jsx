@@ -33,11 +33,17 @@ const EmployeesPage = ({ onDeleteEmployee }) => {
       }
       setEmployees(employeesClone);
     }
+
+    // employeeService.deleteEmployee(id).then(data => {
+
+    // }).catch(error => {
+
+    // })
   };
 
-  if (loading) {
-    return <h1>Loading...</h1>;
-  }
+  // if (loading) {
+  //   return <h1>Loading...</h1>;
+  // }
   return (
     <Grid container spacing={2} justifyContent="flex-end" textAlign="right">
       <Grid item xs={4}>

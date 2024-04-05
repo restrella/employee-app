@@ -9,6 +9,16 @@ const AddEmployeePage = () => {
     console.log("from add employee page handle submit");
     employeeService.addEmployee(employee).then((response) => {
       navigate("/");
+    })
+    .catch(error => {
+        console.log(error)
+        if(error.response && error.response.status === 400) {
+            alert(error.response.data.message[0])
+        }
+
+        if(error && error.code === 'ERR_NETWORK') {
+            alert(error.message)
+        }
     });
   };
 
